@@ -63,31 +63,42 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }))
 
-const MyDropdown: React.FC = () => {
-  const [value, setValue] = React.useState<string>('');
+const Categories = (
+    { onChange }: { onChange: (category: string) => void }
+) => {
+    const [value, setValue] = React.useState<string>('');
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setValue(event.target.value as string);
-  }
+    const handleChange = (event: any) => {
+        setValue(event.target.value as string)
+        onChange(event.target.value as string)
+    }
 
-  return (
-    <Box sx={{ minWidth: 200, mt: 2 }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Categorie</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={value}
-          label="Categorie"
-          onChange={handleChange}
-        >
-          <MenuItem value="electronice">Electronice</MenuItem>
-          <MenuItem value="haine">Haine</MenuItem>
-          <MenuItem value="casa">Casă & Grădină</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-  );
+    return (
+        <Box sx={{ minWidth: 300, ml: 2 }}>
+            <FormControl fullWidth size="small">
+                <Search>
+                    <InputLabel id="demo-simple-select-label">Categorie</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={value}
+                        label="Categorie"
+                        onChange={handleChange}
+                        fullWidth
+                    >
+                        <MenuItem value="">Nothing</MenuItem>
+                        <MenuItem value="politics">Politics</MenuItem>
+                        <MenuItem value="sport">Sport</MenuItem>
+                        <MenuItem value="science ">Science</MenuItem>
+                        <MenuItem value="technology">Technology</MenuItem>
+                        <MenuItem value="business">Business & Trade</MenuItem>
+                        <MenuItem value="health">Health</MenuItem>
+                        <MenuItem value="entertainment">Entertainment</MenuItem>
+                    </Select>
+                </Search>
+            </FormControl>
+        </Box>
+    );
 };
 
 interface Props {
@@ -145,6 +156,8 @@ const Header = ({
                     <SearchIconWrapper><SearchIcon /></SearchIconWrapper>
                     <StyledInputBase placeholder="Caută..." onChangeCapture={handleSearch}/>
                 </Search>
+
+                <Categories onChange={onCategoryChange} />
 
                 <IconButton size="large" color="inherit">
                     <FilterListIcon />

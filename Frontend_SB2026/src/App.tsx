@@ -1,6 +1,8 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import BasicTemplate from './BasicTemplete';
-import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import BasicTemplate from './BasicTemplete'
+import Message from "./components/Messege"
+import { Box } from "@mui/material"
+import { useState } from 'react'
 
 export type Theme = "light" | "dark"
 
@@ -38,10 +40,15 @@ const App = () => {
         <Route
           path="/"
           element={
-            <BasicTemplate
-              currentTheme={theme}
-              onThemeChange={(theme) => setTheme(theme)}
-            />
+            <Box sx={{position: "relative"}}>
+              <BasicTemplate
+                currentTheme={theme}
+                onThemeChange={(theme) => setTheme(theme)}
+              />
+              <Box>
+                <Message />
+              </Box>
+            </Box>
           }
         />
       </Routes>

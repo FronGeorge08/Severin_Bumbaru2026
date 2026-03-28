@@ -25,7 +25,9 @@ const NewsFetcher = ({ category = 'general', q } : Props) => {
         category = "general"
     }
 
-    
+    if (category === "") {
+        category = "general"
+    }
     
     const [articles, setArticles] = useState<Article[]>([]);
     const [loading, setLoading] = useState<boolean>(true);

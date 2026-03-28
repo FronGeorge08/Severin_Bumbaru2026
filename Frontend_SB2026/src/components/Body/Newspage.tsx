@@ -20,23 +20,17 @@ const Newspage = (
     }: Props
 ) => {
     const [oldSearch, setOldSearch] = useState(search)
+    const [oldCategory, setOldCategory] = useState(search)
     const [reloadKey, setReloadKey] = useState(0)
-
-    const pageStyle = themedStyle(
-        {
-            light: {},
-            dark: {},
-            mix: {
-                display: "flex",
-                borderRadius: "2rem",
-            },
-        }
-    )
-
 
     if (search !== oldSearch) {
         setReloadKey(prev => prev + 1) 
         setOldSearch(search)
+    }
+
+    if (category !== oldCategory) {
+        setReloadKey(prev => prev + 1) 
+        setOldCategory(category)
     }
 
     return (

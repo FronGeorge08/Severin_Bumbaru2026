@@ -42,28 +42,8 @@ const Body = () => {
     var view = undefined
     switch (page) {
         case "main":
-            view = <Newspage
-                news = {
-                    [
-                        {
-                            title: "News1"
-                        },
-                        {
-                            title: "News2"
-                        },
-                        {
-                            title: "News3"
-                        },
-                        {
-                            title: "News4"
-                        },
-                        {
-                            title: "News5"
-                        },
-                    ]
-                }
-            />
-            break
+            view = <Newspage />
+        break
     }
 
     return (

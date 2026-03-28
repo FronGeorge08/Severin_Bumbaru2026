@@ -100,7 +100,7 @@ const Header = ({
                 }
             >
                 <Typography variant="h6" noWrap sx={{ display: { xs: 'none', sm: 'block' } }}>
-                    LOGOS
+                    FactShield
                 </Typography>
                 
                 <Search>

@@ -1,18 +1,19 @@
 
 import { Box } from "@mui/material"
 import { themedStyle } from "../../App"
+import NewsFetcher from "./NewsComponets/NewsFetcher"
 
 export type News = {
     title: string,
 }
 
 interface Props {
-    news: News[],
+    category?: string,
 }
 
 const Newspage = (
     {
-        news
+        category
     }: Props
 ) => {
     const pageStyle = themedStyle(
@@ -27,9 +28,7 @@ const Newspage = (
     )
 
     return (
-        <Box sx = {pageStyle}>
-            TODO
-        </Box>
+        <NewsFetcher category = "general" />
     )
 }
 

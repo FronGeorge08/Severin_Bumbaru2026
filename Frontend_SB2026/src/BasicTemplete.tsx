@@ -68,7 +68,6 @@ const BasicTemplate = (
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                 >
                     <MenuItem onClick={handleMenuClose}>Profilul meu</MenuItem>
-                    <MenuItem onClick={handleMenuClose}>Setări</MenuItem>
                     <MenuItem onClick={handleMenuClose}>Deconectare</MenuItem>
                 </Menu>
 

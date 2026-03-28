@@ -31,17 +31,10 @@ const BasicTemplate = (
         onThemeChange,
         currentTheme,
     }: Props
-) => {
-    const [anchorEl, setAnchorEl] = React.useState<any>(null);
+) => {    
+    const [search, setSearch] = React.useState("")
+    const [category, setCategory] = React.useState("")
 
-    const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget)
-    }
-
-    const handleMenuClose = () => {
-        setAnchorEl(null)
-    }
-    
     return (
         <>
             <Box sx={
@@ -53,28 +46,15 @@ const BasicTemplate = (
                     }
                 }
             >
-            {/* --- HEADER --- */}
                 <Header
-                    onProfileOpen={handleProfileMenuOpen}
-                    onThemeChange={onThemeChange}
                     currentTheme={currentTheme}
+                    onThemeChange={onThemeChange}
+                    onSearchChange={setSearch}
+                    onCategoryChange={setCategory}
                 />
+                
+                <Body category={category} search={search}/>
 
-                {/* Meniu Profil */}
-                <Menu
-                    anchorEl={anchorEl}
-                    open={Boolean(anchorEl)}
-                    onClose={handleMenuClose}
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                >
-                    <MenuItem onClick={handleMenuClose}>Profilul meu</MenuItem>
-                    <MenuItem onClick={handleMenuClose}>Deconectare</MenuItem>
-                </Menu>
-
-                {/* --- CONȚINUT PRINCIPAL --- */}
-                <Body />
-
-                {/* --- FOOTER --- */}
                 <Footer/ >
             </Box>
         </>

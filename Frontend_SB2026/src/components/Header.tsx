@@ -11,6 +11,9 @@ import {
   Avatar,
   Box,
   Container,
+  FormControl, 
+  InputLabel, 
+  Select, 
 } from '@mui/material'
 import { styled, alpha } from '@mui/material/styles'
 import SearchIcon from '@mui/icons-material/Search'
@@ -60,16 +63,47 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }))
 
+const MyDropdown: React.FC = () => {
+  const [value, setValue] = React.useState<string>('');
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setValue(event.target.value as string);
+  }
+
+  return (
+    <Box sx={{ minWidth: 200, mt: 2 }}>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Categorie</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={value}
+          label="Categorie"
+          onChange={handleChange}
+        >
+          <MenuItem value="electronice">Electronice</MenuItem>
+          <MenuItem value="haine">Haine</MenuItem>
+          <MenuItem value="casa">Casă & Grădină</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+  );
+};
+
 interface Props {
-    onProfileOpen: (event: React.MouseEvent<HTMLElement>) => void,
     onThemeChange: (theme: Theme) => void,
     currentTheme: Theme,
+
+    onSearchChange: (search: string) => void,
+    onCategoryChange: (category: string) => void,
 }
 
 const Header = ({
-    onProfileOpen,
     onThemeChange,
     currentTheme,
+
+    onSearchChange,
+    onCategoryChange,
 }: Props) => {
     var IconMode = null
     switch (currentTheme) {
@@ -79,6 +113,10 @@ const Header = ({
         case "light":
             IconMode = LightMode
             break
+    }
+
+    const handleSearch = (event: any) => {
+        onSearchChange(event.target.value)
     }
 
     return (
@@ -100,17 +138,19 @@ const Header = ({
                 }
             >
                 <Typography variant="h6" noWrap sx={{ display: { xs: 'none', sm: 'block' } }}>
-                    FactShield
+                    FactShield 🛡️
                 </Typography>
                 
                 <Search>
                     <SearchIconWrapper><SearchIcon /></SearchIconWrapper>
-                    <StyledInputBase placeholder="Caută..." />
+                    <StyledInputBase placeholder="Caută..." onChangeCapture={handleSearch}/>
                 </Search>
 
                 <IconButton size="large" color="inherit">
                     <FilterListIcon />
                 </IconButton>
+
+                <Box sx={{ flexGrow: 1 }} />
 
                 <IconButton
                     size = "large"
@@ -129,12 +169,6 @@ const Header = ({
                     }
                 >
                     <IconMode />
-                </IconButton>
-
-                <Box sx={{ flexGrow: 1 }} />
-
-                <IconButton onClick={onProfileOpen} color="inherit">
-                    <Avatar alt="User" src="/path-to-avatar.jpg" sx={{ width: 35, height: 35 }} />
                 </IconButton>
             </Toolbar>
         </AppBar>

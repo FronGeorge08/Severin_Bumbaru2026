@@ -2,6 +2,7 @@
 import { Box } from "@mui/material"
 import { themedStyle } from "../../App"
 import NewsFetcher from "./NewsComponets/NewsFetcher"
+import { useState } from "react"
 
 export type News = {
     title: string,
@@ -9,13 +10,18 @@ export type News = {
 
 interface Props {
     category?: string,
+    search?: string,
 }
 
 const Newspage = (
     {
-        category
+        category,
+        search,
     }: Props
 ) => {
+    const [oldSearch, setOldSearch] = useState(search)
+    const [reloadKey, setReloadKey] = useState(0)
+
     const pageStyle = themedStyle(
         {
             light: {},
@@ -27,8 +33,14 @@ const Newspage = (
         }
     )
 
+
+    if (search !== oldSearch) {
+        setReloadKey(prev => prev + 1) 
+        setOldSearch(search)
+    }
+
     return (
-        <NewsFetcher category = "general" />
+        <NewsFetcher key={reloadKey} category = {category} q = {search} />
     )
 }
 

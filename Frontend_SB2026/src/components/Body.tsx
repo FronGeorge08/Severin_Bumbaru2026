@@ -19,7 +19,17 @@ import { themedStyle } from '../App'
 
 type Page = "main"
 
-const Body = () => {
+interface Props {
+    category?: string,
+    search?: string,
+}
+
+const Body = (
+    {
+        category,
+        search,
+    }: Props
+) => {
     const [page, setPage] = React.useState<Page>("main")
 
     const containerStyle = themedStyle(
@@ -42,7 +52,7 @@ const Body = () => {
     var view = undefined
     switch (page) {
         case "main":
-            view = <Newspage />
+            view = <Newspage category={category} search={search}/>
         break
     }
 

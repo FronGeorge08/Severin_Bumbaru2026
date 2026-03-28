@@ -16,31 +16,39 @@ type ApiResponse = {
 };
 
 type Props={
-  category?: string
+  category?: string,
+  q?: string,
 }
 
-const NewsFetcher = ({ category = 'general'  } : Props) => {
+const NewsFetcher = ({ category = 'general', q } : Props) => {
     if (category === undefined) {
         category = "general"
     }
 
+    
+    
     const [articles, setArticles] = useState<Article[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-
+    
     useEffect(() => {
         const fetchNews = async () => {
-        try {
-            const apiKey = import.meta.env.VITE_NEWS_API_KEY as string;
+            try {
+                const apiKey = import.meta.env.VITE_NEWS_API_KEY as string;
+                
+                var res
+                if (q === undefined || q === "") {
+                    q = "top headlines"
+                }
 
-            const res = await fetch(
-            `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${apiKey}`
-            );
+                res = await fetch(
+                `https://newsapi.org/v2/everything?q=${q}&language=en&sortBy=publishedAt&pageSize=21&apiKey=${apiKey}`
+                )
 
-            const data: ApiResponse = await res.json();
+                const data: ApiResponse = await res.json();
 
-            if (data.status !== "ok") {
-            throw new Error(data.message || "Unknown error");
+                if (data.status !== "ok") {
+                throw new Error(data.message || "Unknown error");
             }
 
             setArticles(data.articles);

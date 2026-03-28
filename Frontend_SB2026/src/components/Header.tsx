@@ -21,7 +21,6 @@ import FilterListIcon from '@mui/icons-material/FilterList'
 import { LightMode, DarkMode } from '@mui/icons-material'
 import { type Theme, themedStyle } from "../App"
 
-// Stiluri personalizate pentru Search Bar
 const Search = styled('div')(({ theme }) => (
     themedStyle(
         {

@@ -118,7 +118,6 @@ const ChatWidget: React.FC = () => {
             overflow: "hidden",
           }}
         >
-          {/* Header */}
           <Box
             sx={{
               bgcolor: "primary.main",
@@ -137,7 +136,6 @@ const ChatWidget: React.FC = () => {
             </IconButton>
           </Box>
 
-          {/* Messages */}
           <Box
             sx={{
               flex: 1,
@@ -202,7 +200,6 @@ const ChatWidget: React.FC = () => {
             <div ref={messagesEndRef} />
           </Box>
 
-          {/* Inputs */}
           <Box sx={{ p: 1, display: "flex", gap: 0.5, alignItems: "flex-end" }}>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5, flex: 1 }}>
               <TextField
